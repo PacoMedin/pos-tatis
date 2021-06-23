@@ -4,8 +4,6 @@
 require_once "../controllers/productos.controller.php";
 require_once "../models/productos.models.php";
 
-require_once "../controllers/etiquetas.controller.php";
-require_once "../models/etiquetas.models.php";
 
 class TablaProductosVentas
 {
@@ -28,7 +26,6 @@ class TablaProductosVentas
 
             return;
         }
-     
 
         $datosJson = '{
             "data": [';
@@ -39,13 +36,6 @@ class TablaProductosVentas
             ==================================*/
 
             $imagen  = "<img src='" . $productos[$i]["imagen"] . "' width='40px'>";
-
-            /*================================
-            TRAEMOS LA ETIQUETA
-            ==================================*/
-            $item2 = "id";
-            $valor2 = $productos[$i]["id_etiqueta"];
-            $etiquetas = ControladorEtiquetas::ctrMostrarEtiquetas($item2, $valor2);
 
 
             /*================================
@@ -81,14 +71,13 @@ class TablaProductosVentas
             /*================================
             TRAEMOS LAS ACCIONES
             ==================================*/
-            $botones = "<div class='btn-group'><button class='btn btn-primary agregarProducto recuperarBoton' idEtiqueta='".$productos[$i]["id_etiqueta"]."' idProducto='" . $productos[$i]["id"] . "'>Agregar</button></div>";
+            $botones = "<div class='btn-group'><button class='btn btn-primary agregarProducto recuperarBoton' idProducto='" . $productos[$i]["id"] . "'>Agregar</button></div>";
 
 
             $datosJson .= '[
                     "' . ($i + 1) . '",
                     "' . $productos[$i]["codigo"] . '",
                     "' . $productos[$i]["descripcion"] . '",
-                    "' . $etiquetas["etiqueta"] . '",
                     "' . $stock . '",
                     "' . $botones . '",
                     "' . $imagen . '"

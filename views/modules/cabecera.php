@@ -5,14 +5,14 @@
 <a href="inicio" class="logo">
   <!-- Logo-mini-->
   <span class="logo-mini">
+      <!-- <i class="fa fa-cart-arrow-down"></i> -->
       <img src="views/img/plantilla/icono-blanco.png" class="img-responsive" style="padding:10px">
   </span>
   <!-- Logo regular -->
   <span class="logo-lg">
-  <i class="fa fa-wrench"></i>
-  Hecel<strong>chakan</strong>
-   
-      <!-- <img src="views/img/plantilla/logo-blanco-lineal.png" class="img-responsive" style="padding: 10px 0px;"> -->
+  <!-- <i class="fa fa-cart-arrow-down"></i> -->
+    <img src="views/img/plantilla/store.png" class="" style="padding:5px; margin-bottom: 2px">
+  <strong>Hecel</strong>chakan
   </span>
 </a>
 <!-- ========================

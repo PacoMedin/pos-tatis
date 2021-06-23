@@ -164,9 +164,10 @@
                     $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
                    
                     // $etiqueta = $value["etiqueta"];
- 
+                    
+                    error_reporting(E_ALL ^ E_NOTICE);
                     $stockAntiguo = $respuesta["stock"] + $value["cantidad"];
-
+                    
                     // $colorEtq = "info";
 
                     $unidad_medida = $value["unidad_medida"];
@@ -195,52 +196,85 @@
                 
                     }
 
-                    echo '<div class="row" style="padding:5px 15px">
-            
-                        <div class="col-xs-6" style="padding-right:0px">
-            
-                          <div class="input-group">
-                
-                            <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-times"></i></button></span>
+                      if( $respuesta != null ){
 
-                            <input type="text" class="form-control nuevaDescripcionProducto" idProducto="' . $value["id"] . '" name="agregarProducto" value="' . $value["descripcion"] . '" readonly required>
-
-                          </div>
-
-                        </div>
-
-                        <div class="col-xs-3">
+                        echo '<div class="row" style="padding:5px 15px">
               
-                          <input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" idInput="'. $value["id"] .'" nuevaUnidad="'.$unidad_medida.'" value="' . $value["cantidad"] . '" stock="' . $stockAntiguo . '" nuevoStock="' . $value["stock"] . '" required>
-
-                        </div>
-
-                        <div class="col-xs-3 ingresoPrecio" style="padding-left:0px">
-
-                          <div class="input-group">
-
-                            <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                   
-                            <input type="text" class="form-control nuevoPrecioProducto" precioReal="' . $respuesta["precio_venta"] . '" name="nuevoPrecioProducto" value="' . $value["total"] . '" readonly required>
-   
+                          <div class="col-xs-6" style="padding-right:0px">
+              
+                            <div class="input-group">
+                  
+                              <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-times"></i></button></span>
+  
+                              <input type="text" class="form-control nuevaDescripcionProducto" idProducto="' . $value["id"] . '" name="agregarProducto" value="' . $value["descripcion"] . '" readonly required>
+  
+                            </div>
+  
                           </div>
-               
-                        </div>
+  
+                          <div class="col-xs-3">
+                
+                            <input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" idInput="'. $value["id"] .'" nuevaUnidad="'.$unidad_medida.'" value="' . $value["cantidad"] . '" stock="' . $stockAntiguo . '" nuevoStock="' . $value["stock"] . '" required>
+  
+                          </div>
+  
+                          <div class="col-xs-3 ingresoPrecio" style="padding-left:0px">
+  
+                            <div class="input-group">
+  
+                              <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                     
+                              <input type="text" class="form-control nuevoPrecioProducto" precioReal="' . $respuesta["precio_venta"] . '" name="nuevoPrecioProducto" value="' . $value["total"] . '" readonly required>
+     
+                            </div>
+                 
+                          </div>
+                        
+                        </div>';
 
-                        <div class="col-xs-2" style="padding-right:0px">
+                       
+  
+                      }else{
+  
+                        echo '<div class="row" style="padding:5px 15px">
+              
+                          <div class="col-xs-6" style="padding-right:0px">
+              
+                            <div class="input-group">
+                  
+                              <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-times"></i></button></span>
+  
+                              <input type="text" class="form-control nuevaDescripcionProducto" idProducto="' . $value["id"] . '" name="agregarProducto" value="' . $value["descripcion"] . '" readonly required>
+  
+                            </div>
+  
+                          </div>
+  
+                          <div class="col-xs-3">
+                
+                            <input type="number" class="form-control nuevaCantidadProducto" style="background: rgba(253, 38, 0, 0.272)" name="nuevaCantidadProducto" idInput="'. $value["id"] .'" nuevaUnidad="'.$unidad_medida.'" value="' . $value["cantidad"] . '" stock="' . $stockAntiguo . '" nuevoStock="' . $value["stock"] . '" required disabled>
+  
+                          </div>
+  
+                          <div class="col-xs-3 ingresoPrecio" style="padding-left:0px">
+  
+                            <div class="input-group">
+  
+                              <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                     
+                              <input type="text" class="form-control nuevoPrecioProducto" precioReal="' . $respuesta["precio_venta"] . '" name="nuevoPrecioProducto" value="' . $value["total"] . '" readonly required>
+     
+                            </div>
+                 
+                          </div>
+                        
+                        </div>';
+                      
+  
+                      }
+                   
 
-                          <div class="input-group"> 
-                          
-
-                              <input type="hidden" class="nuevaEtiquetaProducto"  value="'.$etiqueta.'" required>
-                              
-				              	  </div>
-		  
-				              	</div>
-
-
-				              
-                      </div>';
+                    
                   }
 
 
@@ -285,9 +319,9 @@
 
                             <div class="input-group">
 
-                              <input type="number" class="form-control" min="0" id="nuevoDescuentoVenta" name="nuevoDescuentoVenta" value="<?php echo $porcentajeDescuento; ?>" required>
+                              <input type="number" class="form-control" min="0" id="nuevoDescuentoVenta" name="nuevoDescuentoVenta" value="<?php echo $porcentajeDescuento; ?>" required disabled>
 
-                              <input type="hidden" name="nuevoPrecioDescuento" id="nuevoPrecioDescuento" value="<?php echo $venta["descuento"]; ?>" required>
+                              <input type="hidden" name="nuevoPrecioDescuento" id="nuevoPrecioDescuento" value="<?php echo $venta["descuento"]; ?>" required >
 
                               <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="<?php echo $venta["neto"]; ?>" required>
 
@@ -414,7 +448,6 @@
                   <th style="width: 10px">#</th>
                   <th>Código</th>
                   <th>Descripcion</th>
-                  <th>Etiqueta</th>
                   <th>Stock</th>
                   <th>Acciones</th>
                   <th>Imagen</th>

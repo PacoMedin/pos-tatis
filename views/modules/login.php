@@ -1,6 +1,6 @@
 <div id="back"></div>
 
-<div class="login-box"  style="color:#CECECE" >
+<div class="login-box"  style="color: rgb(245, 245, 245)" >
 
     <div class="login-logo" style="margin-bottom:100px">
     

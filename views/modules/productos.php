@@ -61,7 +61,6 @@ if ($_SESSION["perfil"] == "Vendedor") {
               <th>Código</th>
               <th>Descripción</th>
               <th>Categoría</th>
-              <th>Etiqueta</th>
               <th>Unidad de medida</th>
               <th>Stock</th>
               <th>Precio de compra</th>
@@ -147,40 +146,7 @@ MODAL AGREGAR PRODUCTO
               </div>
 
             </div>
-            <!-- ENTRADA PARA SELECCIONAR ETIQUETA-->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-tags"></i></span>
-
-                <select class="form-control input-lg" id="nuevaEtiqueta" name="nuevaEtiqueta" required>
-
-                  <option value="">Seleccionar etiqueta</option>
-
-                  <?php
-                   $item = null;
-                   $valor = null;
-       
-                   $etiquetas = ControladorEtiquetas::ctrMostrarEtiquetas($item, $valor);
-       
-                   // var_dump($Etiquetas);
-
-                  foreach ($etiquetas as $key => $value) {
-                    echo '<option value="' . $value["id"] . '">' . $value["etiqueta"] . '</option>';
-                  }
-
-                  ?>
-
-                </select>
-
-              </div>
-
-            </div>
-
-             
-
+  
             <!-- ENTRADA PARA EL CÓDIGO -->
 
             <div class="form-group">
@@ -394,23 +360,7 @@ MODAL EDITAR PRODUCTO
               </div>
 
             </div>
-            <!-- ENTRADA PARA SELECCIONAR ETIQUETA-->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-tags"></i></span>
-
-                <select class="form-control input-lg" name="editarEtiqueta" readonly required>
-
-                  <option id="editarEtiqueta"></option>
-
-                </select>
-
-              </div>
-
-            </div>
+            
 
             <!-- ENTRADA PARA EL CÓDIGO -->
 

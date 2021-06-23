@@ -168,15 +168,15 @@ class ControladorVentas
 				$printer->setFont(Printer::FONT_A);
 				$printer -> setJustification(Printer::JUSTIFY_CENTER);
 
-				$printer -> text("Ferre memo's"."\n");//Nombre de la empresa
+				$printer -> text("Hecelchakan"."\n");//Nombre de la empresa
 
 				//$printer -> feed(1); //Alimentamos el papel 1 vez*/
 				//$printer -> text("NIT: 71.759.963-9"."\n");//Nit de la empresa
 
-				$printer -> text("Dirección:Av. Michoacán, No. 364"."\n");//Dirección de la empresa
-				$printer -> text("CP: 59310, ");//CP de la empresa
+				$printer -> text("Dirección: Coahuila, No. 52"."\n");//Dirección de la empresa
+			    $printer -> text("CP: 59300, ");//CP de la empresa
 				$printer -> text("LA PIEDAD MICH."."\n");//Ciudad de la empresa
-				$printer -> text("Teléfono: 352-525-4332"."\n");//Teléfono de la empresa
+				//$printer -> text("Teléfono: 352-525-4332"."\n");//Teléfono de la empresa
 
 				//$printer -> text("FACTURA N.".$_POST["nuevaVenta"]."\n");//Número de factura
 				$printer -> feed(1); //Alimentamos el papel 1 vez*/
@@ -681,6 +681,9 @@ class ControladorVentas
 
 			$Name = $_GET["reporte"] . '.xls';
 
+			//Creamos contador para el total del reporte
+			$cont = 0;
+
 			header('Expires: 0');
 			header('Cache-control: private');
 			header("Content-type: application/vnd.ms-excel"); // Archivo de Excel
@@ -699,81 +702,66 @@ class ControladorVentas
 			 		<td style='font-weight:bold; border:1px solid #eee;'>VENDEDOR</td>
 			 		<td style='font-weight:bold; border:1px solid #eee;'>CANTIDAD</td>
 			 		<td style='font-weight:bold; border:1px solid #eee;'>PRODUCTOS</td>
-			 		
+			 		<td style='font-weight:bold; border:1px solid #eee;'>TOTAL</td>
 			 		<td style='font-weight:bold; border:1px solid #eee;'>FECHA</td>		
 					 </tr>");
-					 $etqBlanca = "Blanca";
+					 
 
 			foreach ($ventas as $row => $item) {
 
 				$cliente = ControladorClientes::ctrMostrarClientes("id", $item["id_cliente"]);
 				$vendedor = ControladorUsuarios::ctrMostrarUsuario("id", $item["id_vendedor"]);
 				$productos =  json_decode($item["productos"], true);
-				$etq = false;
-				foreach ($productos as $key => $valueProductos) {
+				
+				echo utf8_decode("<tr>
+				<td style='border:1px solid #eee;'>" . $item["codigo"] . "</td> 
+				<td style='border:1px solid #eee;'>" . $cliente["nombre"] . "</td>
+				<td style='border:1px solid #eee;'>" . $vendedor["nombre"] . "</td>
+				<td style='border:1px solid #eee;'>");
 
-					if (strcmp($valueProductos["etiqueta"], $etqBlanca ) === 0) {
-						$etq = true;
-					}
-				}
+				foreach($productos as $key => $valorProducto){
 
-				if ($etq) {
-					echo utf8_decode("<tr>
-			  			<td style='border:1px solid #eee;'>" . $item["codigo"] . "</td> 
-			  			<td style='border:1px solid #eee;'>" . $cliente["nombre"] . "</td>
-			  			<td style='border:1px solid #eee;'>" . $vendedor["nombre"] . "</td>
-			  			<td style='border:1px solid #eee;'>");
-				}
-
-
-
-				foreach ($productos as $key => $valueProductos) {
-
-					if (strcmp($valueProductos["etiqueta"], $etqBlanca ) === 0) {
-
-						if( $valueProductos["cantidad"] < 1){
-
-							if($valueProductos["unidad_medida"] == "m"){
-
-								echo utf8_decode($valueProductos["cantidad"] * 100 ." cm"."". "<br>");
-
-							}elseif($valueProductos["unidad_medida"] == "kg"){
-
-								echo utf8_decode($valueProductos["cantidad"] * 1000 ." g"."". "<br>");
-							}
-
-						}else{
-							
-						  echo utf8_decode($valueProductos["cantidad"] . " " .$valueProductos["unidad_medida"]."<br>");
+					if( $valorProducto["cantidad"] < 1){
+	
+						if($valorProducto["unidad_medida"] == "m"){
+	
+							echo utf8_decode($valorProducto["cantidad"] * 100 ." cm"."". "<br>");
+	
+						}elseif($valorProducto["unidad_medida"] == "kg"){
+	
+							echo utf8_decode($valorProducto["cantidad"] * 1000 ." g"."". "<br>");
 						}
+	
+					}else{
 						
-					}
+					  echo utf8_decode($valorProducto["cantidad"] . " " .$valorProducto["unidad_medida"]."<br>"); 
+				      
+					}							
+					
 				}
-				echo utf8_decode("</td><td style='border:1px solid #eee;'>");
+				echo utf8_decode("</td>");
 
-				foreach ($productos as $key => $valueProductos) {
-					if (strcmp($valueProductos["etiqueta"], $etqBlanca ) === 0) {
-						echo utf8_decode($valueProductos["descripcion"] . "<br>");
-					}
+				echo utf8_decode("<td style='border:1px solid #eee;'>");
+
+				foreach( $productos as $key => $valorProducto){
+
+					echo utf8_decode($valorProducto["descripcion"].""."<br>");
+
 				}
+				
+				echo utf8_decode("</td>
+				<td style='border:1px solid #eee;'>" . $item["total"] . "</td>");
 
-				// echo utf8_decode("</td><td style='border:1px solid #eee;'>");
-				// foreach ($productos as $key => $valueProductos) {
-				// 	if (strcmp($valueProductos["etiqueta"], $etqBlanca ) === 0) {
-				// 		echo utf8_decode($valueProductos["etiqueta"] . "<br>");
-				// 	}
-				// }
+				$cont += $item["total"];
 
-
-				if ($etq) {
-					echo utf8_decode("</td>
-			 		   <td style='border:1px solid #eee;'>" . substr($item["fecha"], 0, 10) . "</td>		
-		 	 		   </tr>");
-				}
+				echo utf8_decode("</td>
+				<td style='border:1px solid #eee;'>" . substr($item["fecha"], 0, 10) . "</td>		
+				</tr>");
+					
 			}
-
-
 			echo "</table>";
+
+			echo utf8_decode("<h1> TOTAL: $ ".$cont."</h1>");
 		}
 	}
 	/*=============================================

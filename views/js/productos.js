@@ -408,10 +408,7 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
                 //console.log("respuesta", respuesta);
                 var datosCategoria = new FormData();
                 datosCategoria.append("idCategoria", respuesta["id_categoria"]);
-
-                var datosEtiqueta = new FormData();
-                datosEtiqueta.append("idEtiqueta", respuesta["id_etiqueta"]);
-                
+    
                 $("#editarUnidadM").html(respuesta["unidad_medida"]);
                 $("#editarUnidadM").val(respuesta["unidad_medida"]);
                 $("#editarStock").attr("editarUnidad",respuesta["unidad_medida"]);
@@ -456,22 +453,7 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
                     }
 
                 });
-                $.ajax({
-                    url: "ajax/etiquetas.ajax.php",
-                    method: "POST",
-                    data: datosEtiqueta,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    dataType: "json",
-                    success:function(respuesta){
-                        //console.log("respuesta", respuesta);
-                        $("#editarEtiqueta").val(respuesta["id"]);
-                        $("#editarEtiqueta").html(respuesta["etiqueta"]);
-
-                    }
-
-                });
+                
                 $("#editarId").val(respuesta["id"]);
                 $("#editarCodigo").val(respuesta["codigo"]);
                 $("#editarDescripcion").val(respuesta["descripcion"]);

@@ -5,8 +5,6 @@ require_once "../models/productos.models.php";
 
 require_once "../controllers/categorias.controller.php";
 require_once "../models/categorias.models.php";
-require_once "../controllers/etiquetas.controller.php";
-require_once "../models/etiquetas.models.php";
 
 class TablaProductos
 {
@@ -47,16 +45,6 @@ class TablaProductos
             $item = "id";
             $valor = $productos[$i]["id_categoria"];
             $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
-
-
-            /*================================
-            TRAEMOS LA ETIQUETA
-            ==================================*/
-
-
-            $item2 = "id";
-            $valor2 = $productos[$i]["id_etiqueta"];
-            $etiquetas = ControladorEtiquetas::ctrMostrarEtiquetas($item2, $valor2);
 
 
             /*================================
@@ -112,7 +100,6 @@ class TablaProductos
                     "' . $productos[$i]["codigo"] . '",
                     "' . $productos[$i]["descripcion"] . '",
                     "' . $categorias["categoria"] . '",
-                    "' . $etiquetas["etiqueta"] . '",
                     "' . $productos[$i]["unidad_medida"] . '",
                     "' . $stock . '",
                     "' . $productos[$i]["precio_compra"] . '",

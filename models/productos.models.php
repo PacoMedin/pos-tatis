@@ -32,11 +32,10 @@ class ModeloProductos {
     ================================= */
     static public function mdlIngresarProductos($tabla, $datos)
     {
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, id_etiqueta, codigo, descripcion, unidad_medida, imagen, stock, precio_compra, precio_venta)
-        VALUES (:id_categoria, :id_etiqueta, :codigo, :descripcion, :unidad_medida, :imagen, :stock, :precio_compra, :precio_venta)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, codigo, descripcion, unidad_medida, imagen, stock, precio_compra, precio_venta)
+        VALUES (:id_categoria, :codigo, :descripcion, :unidad_medida, :imagen, :stock, :precio_compra, :precio_venta)");
         
         $stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
-        $stmt->bindParam(":id_etiqueta", $datos["id_etiqueta"], PDO::PARAM_INT);
         $stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
         $stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
         $stmt->bindParam(":unidad_medida", $datos["unidad"], PDO::PARAM_STR);
@@ -63,12 +62,11 @@ class ModeloProductos {
     ================================= */
     static public function mdlEditarProductos($tabla, $datos)
     {
-        $stmt = Conexion::conectar()->prepare("UPDATE  $tabla SET id_categoria = :id_categoria, id_etiqueta = :id_etiqueta, codigo = :codigo, descripcion = :descripcion, unidad_medida = :unidad_medida, imagen = :imagen,
+        $stmt = Conexion::conectar()->prepare("UPDATE  $tabla SET id_categoria = :id_categoria, codigo = :codigo, descripcion = :descripcion, unidad_medida = :unidad_medida, imagen = :imagen,
          stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta WHERE id = :id");
         
         $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
         $stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
-        $stmt->bindParam(":id_etiqueta", $datos["id_etiqueta"], PDO::PARAM_INT);
         $stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
         $stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
         $stmt->bindParam(":unidad_medida", $datos["unidad"], PDO::PARAM_STR);

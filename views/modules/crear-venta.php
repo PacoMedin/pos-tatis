@@ -17,7 +17,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
   <section class="content-header">
   
-      <h1>Crear venta</h1>
+    <h1>Crear venta</h1>
   
       <div class="col  text-center ">
 
@@ -208,7 +208,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
                             <div class="input-group">
 
-                              <input type="number" class="form-control" min="0" max="100" id="nuevoDescuentoVenta" name="nuevoDescuentoVenta" placeholder="0" value="0" required>
+                              <input type="number" class="form-control" min="0" max="100" id="nuevoDescuentoVenta" name="nuevoDescuentoVenta" placeholder="0" value="0" required disabled>
                               <input type="hidden" name="nuevoPrecioDescuento" id="nuevoPrecioDescuento" required>
                               <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
                               <span class="input-group-addon"><i class="fa fa-percent"></i></span>
@@ -350,7 +350,6 @@ if ($_SESSION["perfil"] == "Especial") {
 
                   <th>Código</th>
                   <th>Descripcion</th>
-                  <th>Etiqueta</th>
                   <th>Stock</th>
                   <th>Acciones</th>
                   <th>Imagen</th>

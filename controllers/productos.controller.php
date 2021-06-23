@@ -90,7 +90,6 @@ class ControladorProductos
       
         $datos = array(
           "id_categoria" => $_POST["nuevaCategoria"],
-          "id_etiqueta" => $_POST["nuevaEtiqueta"],
           "codigo" => $_POST["nuevoCodigo"],
           "descripcion" => $_POST["nuevaDescripcion"],
           "unidad" => $_POST["nuevaUnidad"],
@@ -215,7 +214,6 @@ class ControladorProductos
         $datos = array(
           "id" => $_POST["editarId"],
           "id_categoria" => $_POST["editarCategoria"],
-          "id_etiqueta" => $_POST["editarEtiqueta"],
           "codigo" => $_POST["editarCodigo"],
           "descripcion" => $_POST["editarDescripcion"],
           "unidad" => $_POST["editarUnidad"],

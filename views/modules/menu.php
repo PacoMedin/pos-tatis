@@ -47,17 +47,6 @@
 
 			<li>
 
-				<a href="etiquetas">
-
-					<i class="fa fa-tags"></i>
-					<span>Etiquetas</span>
-
-				</a>
-
-			</li>
-
-			<li>
-
 				<a href="productos">
 
 					<i class="fa fa-product-hunt"></i>
